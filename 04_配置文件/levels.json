@@ -1,0 +1,476 @@
+{
+  "game": "实验室安全官",
+  "version": "1.0.0",
+  "timePerLevel": 90,
+  "scoreCorrect": 10,
+  "scoreWrong": -5,
+  "comboBonus": 2,
+  "comboMax": 10,
+  "levels": [
+    {
+      "id": 1,
+      "name": "化学品储存柜",
+      "subtitle": "把试剂放回正确的柜子",
+      "image": "lv1_chemical.webp",
+      "slots": [
+        {
+          "id": "s_oxidizer",
+          "name": "氧化剂柜",
+          "hint": "强氧化性物质"
+        },
+        {
+          "id": "s_acid",
+          "name": "酸类柜",
+          "hint": "腐蚀性酸性物质"
+        },
+        {
+          "id": "s_base",
+          "name": "碱类柜",
+          "hint": "腐蚀性碱性物质"
+        },
+        {
+          "id": "s_reducer",
+          "name": "还原剂柜",
+          "hint": "易被氧化的物质"
+        },
+        {
+          "id": "s_flammable",
+          "name": "防火防爆柜",
+          "hint": "易燃有机溶剂"
+        },
+        {
+          "id": "s_toxic",
+          "name": "剧毒专柜",
+          "hint": "双人双锁管理"
+        }
+      ],
+      "items": [
+        {
+          "name": "高锰酸钾",
+          "target": "s_oxidizer",
+          "knowledge": "L1_correct_stable"
+        },
+        {
+          "name": "浓盐酸",
+          "target": "s_acid",
+          "knowledge": "L1_acid_base"
+        },
+        {
+          "name": "氢氧化钠",
+          "target": "s_base",
+          "knowledge": "L1_correct_label"
+        },
+        {
+          "name": "无水乙醇",
+          "target": "s_flammable",
+          "knowledge": "L1_correct_fireproof"
+        },
+        {
+          "name": "氰化钾",
+          "target": "s_toxic",
+          "knowledge": "L1_separate_list"
+        },
+        {
+          "name": "过氧化氢30%",
+          "target": "s_oxidizer",
+          "knowledge": "L1_oxidizer_reducer"
+        },
+        {
+          "name": "硫粉",
+          "target": "s_reducer",
+          "knowledge": "L1_correct_tray"
+        },
+        {
+          "name": "浓硫酸",
+          "target": "s_acid",
+          "knowledge": "L1_correct_vent"
+        },
+        {
+          "name": "丙酮",
+          "target": "s_flammable",
+          "knowledge": "L1_correct_ventory"
+        },
+        {
+          "name": "氨水",
+          "target": "s_base",
+          "knowledge": "L1_correct_label"
+        },
+        {
+          "name": "次氯酸钠溶液",
+          "target": "s_oxidizer",
+          "knowledge": "L1_hypochlorite_acid"
+        },
+        {
+          "name": "锌粉",
+          "target": "s_reducer",
+          "knowledge": "L1_oxidizer_reducer"
+        }
+      ],
+      "traps": [
+        {
+          "a": "次氯酸钠溶液",
+          "b": "浓盐酸",
+          "knowledge": "L1_hypochlorite_acid"
+        },
+        {
+          "a": "高锰酸钾",
+          "b": "硫粉",
+          "knowledge": "L1_oxidizer_reducer"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "废弃物分类",
+      "subtitle": "废液与废试剂该往哪儿倒",
+      "image": "lv2_waste.webp",
+      "slots": [
+        {
+          "id": "w_halogen",
+          "name": "含卤素有机废液",
+          "hint": "二氯甲烷、氯仿等"
+        },
+        {
+          "id": "w_organic",
+          "name": "其他有机废液",
+          "hint": "醇、醚、酯类"
+        },
+        {
+          "id": "w_acid",
+          "name": "废酸",
+          "hint": "酸性废液"
+        },
+        {
+          "id": "w_base",
+          "name": "废碱",
+          "hint": "碱性废液"
+        },
+        {
+          "id": "w_heavy",
+          "name": "重金属废液",
+          "hint": "含重金属离子"
+        },
+        {
+          "id": "w_bottle",
+          "name": "试剂空瓶箱",
+          "hint": "已清除残留"
+        },
+        {
+          "id": "w_solid",
+          "name": "固态废物",
+          "hint": "废弃试剂、沾染物"
+        }
+      ],
+      "items": [
+        {
+          "name": "二氯甲烷废液",
+          "target": "w_halogen",
+          "knowledge": "L2_halogen"
+        },
+        {
+          "name": "乙醇废液",
+          "target": "w_organic",
+          "knowledge": "L2_principle"
+        },
+        {
+          "name": "稀盐酸废液",
+          "target": "w_acid",
+          "knowledge": "L2_acid_alkali"
+        },
+        {
+          "name": "氢氧化钠废液",
+          "target": "w_base",
+          "knowledge": "L2_acid_alkali"
+        },
+        {
+          "name": "含铅废液",
+          "target": "w_heavy",
+          "knowledge": "L2_container_color"
+        },
+        {
+          "name": "空的试剂瓶",
+          "target": "w_bottle",
+          "knowledge": "L2_empty_bottle"
+        },
+        {
+          "name": "废弃固体试剂",
+          "target": "w_solid",
+          "knowledge": "L2_original_bottle"
+        },
+        {
+          "name": "氯仿废液",
+          "target": "w_halogen",
+          "knowledge": "L2_halogen"
+        },
+        {
+          "name": "丙酮废液",
+          "target": "w_organic",
+          "knowledge": "L2_fill_level"
+        },
+        {
+          "name": "沾染化学品的抹布",
+          "target": "w_solid",
+          "knowledge": "L2_no_mixing_life"
+        }
+      ],
+      "traps": [
+        {
+          "a": "二氯甲烷废液",
+          "b": "乙醇废液",
+          "knowledge": "L2_halogen"
+        },
+        {
+          "a": "稀盐酸废液",
+          "b": "氢氧化钠废液",
+          "knowledge": "L2_acid_alkali"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "用电与消防",
+      "subtitle": "不同起火源，选对灭火方式",
+      "image": "lv3_fire.webp",
+      "slots": [
+        {
+          "id": "f_co2",
+          "name": "二氧化碳灭火器",
+          "hint": "不留残渣"
+        },
+        {
+          "id": "f_dry",
+          "name": "干粉灭火器",
+          "hint": "通用型"
+        },
+        {
+          "id": "f_sand",
+          "name": "消防沙／干砂",
+          "hint": "覆盖窒息"
+        }
+      ],
+      "items": [
+        {
+          "name": "仪器设备起火",
+          "target": "f_co2",
+          "knowledge": "L3_correct_extinguisher_co2"
+        },
+        {
+          "name": "带电设备起火",
+          "target": "f_co2",
+          "knowledge": "L3_electric"
+        },
+        {
+          "name": "精密仪器起火",
+          "target": "f_co2",
+          "knowledge": "L3_correct_extinguisher_co2"
+        },
+        {
+          "name": "金属钠起火",
+          "target": "f_sand",
+          "knowledge": "L3_water_reactive"
+        },
+        {
+          "name": "镁粉起火",
+          "target": "f_sand",
+          "knowledge": "L3_water_reactive"
+        },
+        {
+          "name": "有机溶剂起火",
+          "target": "f_dry",
+          "knowledge": "L3_organic"
+        },
+        {
+          "name": "纸张木材起火",
+          "target": "f_dry",
+          "knowledge": "L3_correct_extinguisher_dry"
+        },
+        {
+          "name": "乙醇泄漏起火",
+          "target": "f_dry",
+          "knowledge": "L3_wrong_water_advice"
+        }
+      ],
+      "traps": [
+        {
+          "a": "金属钠起火",
+          "b": "仪器设备起火",
+          "knowledge": "L3_water_reactive"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "高压高温与气瓶",
+      "subtitle": "气瓶该放哪，该怎么用",
+      "image": "lv4_cylinder.webp",
+      "slots": [
+        {
+          "id": "g_oxid",
+          "name": "助燃气体区",
+          "hint": "氧气等"
+        },
+        {
+          "id": "g_fuel",
+          "name": "可燃气体区",
+          "hint": "乙炔、氢气"
+        },
+        {
+          "id": "g_inert",
+          "name": "惰性气体区",
+          "hint": "氮气、氩气"
+        },
+        {
+          "id": "g_danger",
+          "name": "需整改操作",
+          "hint": "挑出违规做法"
+        }
+      ],
+      "items": [
+        {
+          "name": "氧气瓶",
+          "target": "g_oxid",
+          "knowledge": "L4_correct_color"
+        },
+        {
+          "name": "乙炔瓶",
+          "target": "g_fuel",
+          "knowledge": "L4_separate_gas"
+        },
+        {
+          "name": "氮气瓶",
+          "target": "g_inert",
+          "knowledge": "L4_upright"
+        },
+        {
+          "name": "氢气瓶",
+          "target": "g_fuel",
+          "knowledge": "L4_separate_gas"
+        },
+        {
+          "name": "卧放的气瓶",
+          "target": "g_danger",
+          "knowledge": "L4_upright"
+        },
+        {
+          "name": "氧气瓶（沾油）",
+          "target": "g_danger",
+          "knowledge": "L4_oil"
+        },
+        {
+          "name": "用完没余压的气瓶",
+          "target": "g_danger",
+          "knowledge": "L4_no_exhaust"
+        },
+        {
+          "name": "没戴瓶帽搬运",
+          "target": "g_danger",
+          "knowledge": "L4_cap"
+        },
+        {
+          "name": "用瓶阀固定气瓶",
+          "target": "g_danger",
+          "knowledge": "L4_no_valve_anchor"
+        },
+        {
+          "name": "氩气瓶",
+          "target": "g_inert",
+          "knowledge": "L4_correct_inspect"
+        }
+      ],
+      "traps": [
+        {
+          "a": "氧气瓶",
+          "b": "乙炔瓶",
+          "knowledge": "L4_separate_gas"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "应急处置",
+      "subtitle": "出事了，第一步做什么",
+      "image": "lv5_emergency.webp",
+      "slots": [
+        {
+          "id": "e_first",
+          "name": "立即救护／处置",
+          "hint": "现场可立即行动的"
+        },
+        {
+          "id": "e_evac",
+          "name": "撤离并上报",
+          "hint": "需要专业力量"
+        },
+        {
+          "id": "e_report",
+          "name": "报告与记录",
+          "hint": "流程性要求"
+        },
+        {
+          "id": "e_fix",
+          "name": "日常点检",
+          "hint": "预防性工作"
+        }
+      ],
+      "items": [
+        {
+          "name": "皮肤沾到浓硫酸",
+          "target": "e_first",
+          "knowledge": "L3_burn"
+        },
+        {
+          "name": "眼睛溅入试剂",
+          "target": "e_first",
+          "knowledge": "L3_eye"
+        },
+        {
+          "name": "触电者倒地",
+          "target": "e_first",
+          "knowledge": "L5_electric_shock"
+        },
+        {
+          "name": "吸入有毒气体",
+          "target": "e_first",
+          "knowledge": "L5_inhale"
+        },
+        {
+          "name": "大量化学品泄漏",
+          "target": "e_evac",
+          "knowledge": "L5_leak_big"
+        },
+        {
+          "name": "火势失控",
+          "target": "e_evac",
+          "knowledge": "L5_119"
+        },
+        {
+          "name": "发生小型事故后",
+          "target": "e_report",
+          "knowledge": "L5_correct_report"
+        },
+        {
+          "name": "洗眼器出水不畅",
+          "target": "e_fix",
+          "knowledge": "L5_shower"
+        },
+        {
+          "name": "急救药箱药品过期",
+          "target": "e_fix",
+          "knowledge": "L5_correct_kit"
+        },
+        {
+          "name": "发现隐患",
+          "target": "e_report",
+          "knowledge": "L5_correct_training"
+        }
+      ],
+      "traps": [
+        {
+          "a": "触电者倒地",
+          "b": "大量化学品泄漏",
+          "knowledge": "L5_electric_shock"
+        }
+      ]
+    }
+  ]
+}
