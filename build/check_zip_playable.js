@@ -1,18 +1,25 @@
 /**
- * 提交包可用性验证：解压后的单文件能否直接打开并进入游戏。
+ * 可用性验证：确认单文件能直接打开并进入游戏。
+ * 既支持本地文件，也支持线上地址。
  *
  * 用法：
  *   export NODE_PATH="C:/Users/lenovo/.workbuddy/binaries/node/workspace/node_modules"
- *   node build/check_zip_playable.js "<解压后的 html 绝对路径>"
+ *   node build/check_zip_playable.js "<html 绝对路径>"
+ *   node build/check_zip_playable.js "https://lingfengyuthu.github.io/lab-safety-officer/"
  *
  * 检查项：页面无外部依赖、首页数据正确、点击开始能进入第 1 关、无 JS 报错。
  */
 const fs = require('fs');
 const path = require('path');
 
-const HTML = process.argv[2];
-if (!HTML || !fs.existsSync(HTML)) {
-  console.error('[fail] 请传入存在的 HTML 路径');
+const TARGET = process.argv[2];
+if (!TARGET) {
+  console.error('[fail] 请传入 HTML 路径或线上地址');
+  process.exit(2);
+}
+const isUrl = /^https?:\/\//.test(TARGET);
+if (!isUrl && !fs.existsSync(TARGET)) {
+  console.error('[fail] 文件不存在：' + TARGET);
   process.exit(2);
 }
 
@@ -40,9 +47,9 @@ const LOCAL_CHROME = 'C:/Users/lenovo/AppData/Local/ms-playwright/chromium-1234/
   const results = [];
   const ok = (n, c, extra) => results.push({ n, c: !!c, extra });
 
-  // 用 file:// 打开，模拟评委双击
-  const url = 'file:///' + HTML.replace(/\\/g, '/');
-  await page.goto(url, { waitUntil: 'load' });
+  // 线上地址直接用，本地文件转成 file:// 协议，模拟评委双击
+  const url = isUrl ? TARGET : 'file:///' + TARGET.replace(/\\/g, '/');
+  await page.goto(url, { waitUntil: 'load', timeout: 60000 });
   await page.waitForTimeout(1200);
 
   // 1. 页面标题
@@ -77,7 +84,7 @@ const LOCAL_CHROME = 'C:/Users/lenovo/AppData/Local/ms-playwright/chromium-1234/
   await browser.close();
 
   console.log('=== 提交包可用性验证 ===');
-  console.log('文件：' + HTML);
+  console.log('目标：' + TARGET);
   let bad = 0;
   for (const r of results) {
     if (!r.c) bad += 1;
