@@ -1,11 +1,38 @@
 {
   "game": "实验室安全官",
-  "version": "1.0.0",
-  "timePerLevel": 90,
-  "scoreCorrect": 10,
-  "scoreWrong": -5,
-  "comboBonus": 2,
-  "comboMax": 10,
+  "version": "2.0.0",
+  "note": "本文件由 build/gen_levels_json.js 从运行时数据源 02_源代码/src/data/knowledge.js 导出，供评审查阅玩法结构。游戏运行时不读取本文件，直接读取数据源，两者内容一致。",
+  "scoring": {
+    "timePerLevel": 100,
+    "scoreCorrect": 10,
+    "scoreScenario": 15,
+    "scoreReaction": 8,
+    "comboBonus": 2,
+    "comboMax": 5,
+    "expertFrom": 5,
+    "expertBonus": 3,
+    "riskWrong": 1,
+    "riskTrap": 3,
+    "riskScenario": 2,
+    "riskMax": 5,
+    "comment": "隐患值机制替代直接扣分：归位错误 +1，触发配伍禁忌 +3，情境决策错误 +2，累计至5 格本关重来。错误有实际代价，但不立即结束游戏。"
+  },
+  "gameFlow": [
+    "归位排查",
+    "配伍禁忌实验",
+    "情境决策"
+  ],
+  "counts": {
+    "levels": 6,
+    "knowledgePoints": 65,
+    "scenarios": 6,
+    "reactions": 6,
+    "outcomeOptions": [
+      "剧烈反应",
+      "平稳共存",
+      "视条件而定"
+    ]
+  },
   "levels": [
     {
       "id": 1,
@@ -44,68 +71,70 @@
           "hint": "双人双锁管理"
         }
       ],
+      "itemCount": 12,
       "items": [
         {
           "name": "高锰酸钾",
-          "target": "s_oxidizer",
-          "knowledge": "L1_correct_stable"
+          "slot": "s_oxidizer",
+          "k": "L1_correct_stable"
         },
         {
           "name": "浓盐酸",
-          "target": "s_acid",
-          "knowledge": "L1_acid_base"
+          "slot": "s_acid",
+          "k": "L1_acid_base"
         },
         {
           "name": "氢氧化钠",
-          "target": "s_base",
-          "knowledge": "L1_correct_label"
+          "slot": "s_base",
+          "k": "L1_correct_label"
         },
         {
           "name": "无水乙醇",
-          "target": "s_flammable",
-          "knowledge": "L1_correct_fireproof"
+          "slot": "s_flammable",
+          "k": "L1_correct_fireproof"
         },
         {
           "name": "氰化钾",
-          "target": "s_toxic",
-          "knowledge": "L1_separate_list"
+          "slot": "s_toxic",
+          "k": "L1_separate_list"
         },
         {
           "name": "过氧化氢30%",
-          "target": "s_oxidizer",
-          "knowledge": "L1_oxidizer_reducer"
+          "slot": "s_oxidizer",
+          "k": "L1_oxidizer_reducer"
         },
         {
           "name": "硫粉",
-          "target": "s_reducer",
-          "knowledge": "L1_correct_tray"
+          "slot": "s_reducer",
+          "k": "L1_correct_tray"
         },
         {
           "name": "浓硫酸",
-          "target": "s_acid",
-          "knowledge": "L1_correct_vent"
+          "slot": "s_acid",
+          "k": "L1_correct_vent"
         },
         {
           "name": "丙酮",
-          "target": "s_flammable",
-          "knowledge": "L1_correct_ventory"
+          "slot": "s_flammable",
+          "k": "L1_correct_ventory"
         },
         {
           "name": "氨水",
-          "target": "s_base",
-          "knowledge": "L1_correct_label"
+          "slot": "s_base",
+          "k": "L1_correct_label"
         },
         {
           "name": "次氯酸钠溶液",
-          "target": "s_oxidizer",
-          "knowledge": "L1_hypochlorite_acid"
+          "slot": "s_oxidizer",
+          "k": "L1_hypochlorite_acid"
         },
         {
           "name": "锌粉",
-          "target": "s_reducer",
-          "knowledge": "L1_oxidizer_reducer"
+          "slot": "s_reducer",
+          "k": "L1_oxidizer_reducer"
         }
       ],
+      "trapCount": 2,
       "traps": [
         {
           "a": "次氯酸钠溶液",
@@ -117,7 +146,37 @@
           "b": "硫粉",
           "knowledge": "L1_oxidizer_reducer"
         }
-      ]
+      ],
+      "reaction": [
+        {
+          "a": "次氯酸钠溶液",
+          "b": "浓盐酸",
+          "outcome": "danger",
+          "expect": "剧烈反应",
+          "result": "剧烈反应",
+          "describe": "两液接触即反应，容器上方出现黄绿色气体云团。",
+          "why": "氧化剂与酸类接触放出氯气。这是配伍禁忌中最典型的一例。",
+          "knowledge": "L3_chlorine"
+        }
+      ],
+      "scenario": {
+        "scene": "你在整理试剂柜时，发现一瓶标签已经模糊得看不清成分，瓶中约剩三分之一液体。柜子里其他试剂都有明确标签。",
+        "question": "你应当怎么处理这瓶试剂？",
+        "answer": 1,
+        "options": [
+          "凭颜色和气味判断成分，贴上新标签继续使用",
+          "不再自行判断，按不明试剂移交危险废物处置，并重新领用",
+          "倒掉液体，保留空瓶放回原位",
+          "与相邻的试剂混在一起，方便统一管理"
+        ],
+        "analysis": [
+          "颜色气味都不可靠——许多试剂颜色相近，气味则可能刺激呼吸道甚至有毒，无法作为鉴别依据。",
+          "正确。标签丢失意味着成分不明，MSDS 无法对应，处置方案也就无法确定；不明试剂按危险废物移交是唯一稳妥的做法。",
+          "直接倒掉既污染环境又可能产生危险反应，且清空后残留物仍在瓶内，仍属危险废物。",
+          "与性质未知的试剂混放，等于放弃了配伍禁忌的判断依据，混放后一旦反应后果难以追溯。"
+        ],
+        "knowledge": "L1_correct_label"
+      }
     },
     {
       "id": 2,
@@ -161,58 +220,60 @@
           "hint": "废弃试剂、沾染物"
         }
       ],
+      "itemCount": 10,
       "items": [
         {
           "name": "二氯甲烷废液",
-          "target": "w_halogen",
-          "knowledge": "L2_halogen"
+          "slot": "w_halogen",
+          "k": "L2_halogen"
         },
         {
           "name": "乙醇废液",
-          "target": "w_organic",
-          "knowledge": "L2_principle"
+          "slot": "w_organic",
+          "k": "L2_principle"
         },
         {
           "name": "稀盐酸废液",
-          "target": "w_acid",
-          "knowledge": "L2_acid_alkali"
+          "slot": "w_acid",
+          "k": "L2_acid_alkali"
         },
         {
           "name": "氢氧化钠废液",
-          "target": "w_base",
-          "knowledge": "L2_acid_alkali"
+          "slot": "w_base",
+          "k": "L2_acid_alkali"
         },
         {
           "name": "含铅废液",
-          "target": "w_heavy",
-          "knowledge": "L2_container_color"
+          "slot": "w_heavy",
+          "k": "L2_container_color"
         },
         {
           "name": "空的试剂瓶",
-          "target": "w_bottle",
-          "knowledge": "L2_empty_bottle"
+          "slot": "w_bottle",
+          "k": "L2_empty_bottle"
         },
         {
           "name": "废弃固体试剂",
-          "target": "w_solid",
-          "knowledge": "L2_original_bottle"
+          "slot": "w_solid",
+          "k": "L2_original_bottle"
         },
         {
           "name": "氯仿废液",
-          "target": "w_halogen",
-          "knowledge": "L2_halogen"
+          "slot": "w_halogen",
+          "k": "L2_halogen"
         },
         {
           "name": "丙酮废液",
-          "target": "w_organic",
-          "knowledge": "L2_fill_level"
+          "slot": "w_organic",
+          "k": "L2_fill_level"
         },
         {
           "name": "沾染化学品的抹布",
-          "target": "w_solid",
-          "knowledge": "L2_no_mixing_life"
+          "slot": "w_solid",
+          "k": "L2_no_mixing_life"
         }
       ],
+      "trapCount": 2,
       "traps": [
         {
           "a": "二氯甲烷废液",
@@ -224,13 +285,212 @@
           "b": "氢氧化钠废液",
           "knowledge": "L2_acid_alkali"
         }
-      ]
+      ],
+      "reaction": [
+        {
+          "a": "二氯甲烷废液",
+          "b": "乙醇废液",
+          "outcome": "caution",
+          "expect": "视条件而定",
+          "result": "视条件而定",
+          "describe": "两液互不相溶，静置后分为两层。",
+          "why": "含卤与不含卤有机废液混装不会立刻剧烈反应，但蒸气毒性叠加，且后续处理工艺更难选择，仍应分开收集。",
+          "knowledge": "L3_halogen_organic"
+        }
+      ],
+      "scenario": {
+        "scene": "你所在单位的两套制度对废液桶颜色要求不一致：一套要求含卤废液用白色桶，另一套要求用红色桶。你的实验产生了一批二氯甲烷废液。",
+        "question": "你应当依据什么来判断这批废液该进哪个桶？",
+        "answer": 2,
+        "options": [
+          "按颜色标准更新较早的那套执行",
+          "按自己实验室里其他同学的习惯处理",
+          "按废液的化学性质与不相容性分类，并服从本单位现行规定",
+          "两种桶都放一点，避免标准冲突"
+        ],
+        "analysis": [
+          "标准有更新早晚之分不代表后者失效，选错依据可能导致分类错误。",
+          "他人的习惯可能本身就不合规，横向效仿会放大错误。",
+          "正确。颜色只是标识，判断依据必须是化学性质与不相容性；而具体执行必须服从本单位现行规定，这是判断与执行两个层次的问题。",
+          "分装到两个桶中破坏了分类完整性，后续处理时仍需重新合并，且增加泄漏风险点。"
+        ],
+        "knowledge": "L2_container_color"
+      }
     },
     {
       "id": 3,
+      "name": "配伍禁忌实验",
+      "subtitle": "这两样东西，能放一起吗",
+      "image": "lv3_reaction.webp",
+      "slots": [
+        {
+          "id": "p_oxidizer",
+          "name": "氧化性试剂",
+          "hint": "强氧化性"
+        },
+        {
+          "id": "p_reducer",
+          "name": "还原性物质",
+          "hint": "易被氧化"
+        },
+        {
+          "id": "p_acid",
+          "name": "酸性物质",
+          "hint": "挥发性酸"
+        },
+        {
+          "id": "p_base",
+          "name": "碱性物质",
+          "hint": "强碱"
+        },
+        {
+          "id": "p_organic",
+          "name": "有机溶剂",
+          "hint": "醇、醚、酮"
+        },
+        {
+          "id": "p_sulfide",
+          "name": "含硫物质",
+          "hint": "硫化物、硫粉"
+        }
+      ],
+      "itemCount": 13,
+      "items": [
+        {
+          "name": "高锰酸钾",
+          "slot": "p_oxidizer",
+          "k": "L3_oxidizer_reducer"
+        },
+        {
+          "name": "过氧化氢30%",
+          "slot": "p_oxidizer",
+          "k": "L3_oxidizer_organic"
+        },
+        {
+          "name": "硝酸",
+          "slot": "p_oxidizer",
+          "k": "L3_definition"
+        },
+        {
+          "name": "硫粉",
+          "slot": "p_sulfide",
+          "k": "L3_oxidizer_reducer"
+        },
+        {
+          "name": "硫化钠",
+          "slot": "p_sulfide",
+          "k": "L3_sulfide_acid"
+        },
+        {
+          "name": "锌粉",
+          "slot": "p_reducer",
+          "k": "L3_definition"
+        },
+        {
+          "name": "浓盐酸",
+          "slot": "p_acid",
+          "k": "L3_chlorine"
+        },
+        {
+          "name": "浓硫酸",
+          "slot": "p_acid",
+          "k": "L3_acid_base"
+        },
+        {
+          "name": "氢氧化钠",
+          "slot": "p_base",
+          "k": "L3_acid_base"
+        },
+        {
+          "name": "氨水",
+          "slot": "p_base",
+          "k": "L3_ammonia_bleach"
+        },
+        {
+          "name": "次氯酸钠溶液",
+          "slot": "p_oxidizer",
+          "k": "L3_chlorine"
+        },
+        {
+          "name": "无水乙醇",
+          "slot": "p_organic",
+          "k": "L3_oxidizer_organic"
+        },
+        {
+          "name": "丙酮",
+          "slot": "p_organic",
+          "k": "L3_oxidizer_organic"
+        }
+      ],
+      "trapCount": 6,
+      "traps": [
+        {
+          "a": "次氯酸钠溶液",
+          "b": "浓盐酸",
+          "knowledge": "L3_chlorine"
+        },
+        {
+          "a": "氨水",
+          "b": "次氯酸钠溶液",
+          "knowledge": "L3_ammonia_bleach"
+        },
+        {
+          "a": "硫化钠",
+          "b": "浓盐酸",
+          "knowledge": "L3_sulfide_acid"
+        },
+        {
+          "a": "高锰酸钾",
+          "b": "硫粉",
+          "knowledge": "L3_oxidizer_reducer"
+        },
+        {
+          "a": "过氧化氢30%",
+          "b": "丙酮",
+          "knowledge": "L3_oxidizer_organic"
+        },
+        {
+          "a": "浓硫酸",
+          "b": "氢氧化钠",
+          "knowledge": "L3_acid_base"
+        }
+      ],
+      "reaction": [
+        {
+          "a": "过氧化氢30%",
+          "b": "丙酮",
+          "outcome": "danger",
+          "expect": "剧烈反应",
+          "result": "剧烈反应",
+          "describe": "液体迅速升温，表面出现密集气泡。",
+          "why": "强氧化剂为有机物提供氧源，反应放热可引燃溶剂，量较大时存在爆炸性混合物的可能。",
+          "knowledge": "L3_oxidizer_organic"
+        }
+      ],
+      "scenario": {
+        "scene": "你在实验台上同时发现一瓶次氯酸钠消毒液和一瓶稀盐酸，两者都敞口放在相邻位置。附近没有其他人在操作。",
+        "question": "你应当第一时间做什么？",
+        "answer": 1,
+        "options": [
+          "把两瓶都拿到一起，观察是否会反应，顺便确认配伍禁忌是否真的存在",
+          "先把两瓶分开、远离对方并盖紧，随后查阅 MSDS 确认相容性",
+          "先拍照记录这个隐患位置，留作实验室安全检查的证据",
+          "味道闻一下判断是否有刺激性气味"
+        ],
+        "analysis": [
+          "这正是事故发生的过程。敞口相邻的酸与次氯酸钠已经具备反应条件，主动靠近实验等于制造事故。",
+          "正确。消除接触条件是第一位的，确认相容性是第二步——顺序不能颠倒，先隔离再核实。",
+          "记录隐患重要，但它排在消除即时危险之后。先拍照的这几秒里，事故可能已经发生。",
+          "次氯酸钠与盐酸反应生成的氯气正具有刺激性气味，主动嗅吸等于把自己置于中毒风险中，且无法据此判断浓度。"
+        ],
+        "knowledge": "L3_chlorine"
+      }
+    },
+    {
+      "id": 4,
       "name": "用电与消防",
       "subtitle": "不同起火源，选对灭火方式",
-      "image": "lv3_fire.webp",
+      "image": "lv4_fire.webp",
       "slots": [
         {
           "id": "f_co2",
@@ -248,61 +508,93 @@
           "hint": "覆盖窒息"
         }
       ],
+      "itemCount": 8,
       "items": [
         {
           "name": "仪器设备起火",
-          "target": "f_co2",
-          "knowledge": "L3_correct_extinguisher_co2"
+          "slot": "f_co2",
+          "k": "L4_correct_extinguisher_co2"
         },
         {
           "name": "带电设备起火",
-          "target": "f_co2",
-          "knowledge": "L3_electric"
+          "slot": "f_co2",
+          "k": "L4_electric"
         },
         {
           "name": "精密仪器起火",
-          "target": "f_co2",
-          "knowledge": "L3_correct_extinguisher_co2"
+          "slot": "f_co2",
+          "k": "L4_correct_extinguisher_co2"
         },
         {
           "name": "金属钠起火",
-          "target": "f_sand",
-          "knowledge": "L3_water_reactive"
+          "slot": "f_sand",
+          "k": "L4_water_reactive"
         },
         {
           "name": "镁粉起火",
-          "target": "f_sand",
-          "knowledge": "L3_water_reactive"
+          "slot": "f_sand",
+          "k": "L4_water_reactive"
         },
         {
           "name": "有机溶剂起火",
-          "target": "f_dry",
-          "knowledge": "L3_organic"
+          "slot": "f_dry",
+          "k": "L4_organic"
         },
         {
           "name": "纸张木材起火",
-          "target": "f_dry",
-          "knowledge": "L3_correct_extinguisher_dry"
+          "slot": "f_dry",
+          "k": "L4_correct_extinguisher_dry"
         },
         {
           "name": "乙醇泄漏起火",
-          "target": "f_dry",
-          "knowledge": "L3_wrong_water_advice"
+          "slot": "f_dry",
+          "k": "L4_wrong_water_advice"
         }
       ],
+      "trapCount": 1,
       "traps": [
         {
           "a": "金属钠起火",
           "b": "仪器设备起火",
-          "knowledge": "L3_water_reactive"
+          "knowledge": "L4_water_reactive"
         }
-      ]
+      ],
+      "reaction": [
+        {
+          "a": "金属钠",
+          "b": "消防水",
+          "outcome": "danger",
+          "expect": "剧烈反应",
+          "result": "剧烈反应",
+          "describe": "固体表面剧烈翻动，冒出火焰，氢气逸出。",
+          "why": "遇水反应金属与水反应放出氢气并放出大量热，火焰在起火物质上用水扑救会显著加剧危险。",
+          "knowledge": "L3_metals_water"
+        }
+      ],
+      "scenario": {
+        "scene": "实验台上的丙酮打翻并引燃，火焰约巴掌大小，正沿着台面液体蔓延。旁边是接电的加热电源，台面上还有一桶溶剂废液。",
+        "question": "你应当第一时间做什么？",
+        "answer": 1,
+        "options": [
+          "用实验室的水龙头把液体冲掉",
+          "切断该区域电源，用干粉灭火器对准火焰根部喷射",
+          "先搬开旁边的溶剂废液桶，再想办法灭火",
+          "用湿抹布覆盖住火焰"
+        ],
+        "analysis": [
+          "丙酮与水不相溶且燃点低，用水冲只会把燃烧的液体推到更大范围，甚至溅射扩散火势。",
+          "正确。带电环境下先断电是前提，再用干粉灭火器对准根部。顺序颠倒——先搬桶——可能延误灭火的最初几秒。",
+          "搬桶是合理的保护措施，但在火焰正在蔓延时优先去做它，等于用关键的几秒换一件可以之后再做的事。",
+          "湿抹布含水，遇水反应类风险之外，对有机溶剂火灾效果有限，且水分会助长蒸气扩散。"
+        ],
+        "knowledge": "L4_organic"
+      }
     },
     {
-      "id": 4,
+      "id": 5,
       "name": "高压高温与气瓶",
       "subtitle": "气瓶该放哪，该怎么用",
-      "image": "lv4_cylinder.webp",
+      "image": "lv5_cylinder.webp",
       "slots": [
         {
           "id": "g_oxid",
@@ -325,71 +617,103 @@
           "hint": "挑出违规做法"
         }
       ],
+      "itemCount": 10,
       "items": [
         {
           "name": "氧气瓶",
-          "target": "g_oxid",
-          "knowledge": "L4_correct_color"
+          "slot": "g_oxid",
+          "k": "L5_correct_color"
         },
         {
           "name": "乙炔瓶",
-          "target": "g_fuel",
-          "knowledge": "L4_separate_gas"
+          "slot": "g_fuel",
+          "k": "L5_separate_gas"
         },
         {
           "name": "氮气瓶",
-          "target": "g_inert",
-          "knowledge": "L4_upright"
+          "slot": "g_inert",
+          "k": "L5_upright"
         },
         {
           "name": "氢气瓶",
-          "target": "g_fuel",
-          "knowledge": "L4_separate_gas"
+          "slot": "g_fuel",
+          "k": "L5_separate_gas"
         },
         {
           "name": "卧放的气瓶",
-          "target": "g_danger",
-          "knowledge": "L4_upright"
+          "slot": "g_danger",
+          "k": "L5_upright"
         },
         {
           "name": "氧气瓶（沾油）",
-          "target": "g_danger",
-          "knowledge": "L4_oil"
+          "slot": "g_danger",
+          "k": "L5_oil"
         },
         {
           "name": "用完没余压的气瓶",
-          "target": "g_danger",
-          "knowledge": "L4_no_exhaust"
+          "slot": "g_danger",
+          "k": "L5_no_exhaust"
         },
         {
           "name": "没戴瓶帽搬运",
-          "target": "g_danger",
-          "knowledge": "L4_cap"
+          "slot": "g_danger",
+          "k": "L5_cap"
         },
         {
           "name": "用瓶阀固定气瓶",
-          "target": "g_danger",
-          "knowledge": "L4_no_valve_anchor"
+          "slot": "g_danger",
+          "k": "L5_no_valve_anchor"
         },
         {
           "name": "氩气瓶",
-          "target": "g_inert",
-          "knowledge": "L4_correct_inspect"
+          "slot": "g_inert",
+          "k": "L5_correct_inspect"
         }
       ],
+      "trapCount": 1,
       "traps": [
         {
           "a": "氧气瓶",
           "b": "乙炔瓶",
-          "knowledge": "L4_separate_gas"
+          "knowledge": "L5_separate_gas"
         }
-      ]
+      ],
+      "reaction": [
+        {
+          "a": "氧气瓶",
+          "b": "乙炔瓶",
+          "outcome": "danger",
+          "expect": "剧烈反应",
+          "result": "剧烈反应",
+          "describe": "若阀门同时开启，两者混合后遇火源瞬时燃烧。",
+          "why": "助燃气体与可燃气体必须分区存放、分开使用。此风险不在于气体本身，而在于两者同时在场且缺乏物理隔离。",
+          "knowledge": "L5_separate_gas"
+        }
+      ],
+      "scenario": {
+        "scene": "你推开气瓶间门，闻到一股明显的异味。门内的氧气瓶与乙炔瓶都竖直固定在同一区域，气瓶间的总电源开关在门外的走廊上。",
+        "question": "你应当第一时间做什么？",
+        "answer": 0,
+        "options": [
+          "立即退出门外、到上风向位置，并切断该区域电源后报告",
+          "进入气瓶间查找漏点并关阀",
+          "开窗通风并继续在室内观察一段时间",
+          "打开手机手电筒仔细查看是哪一瓶在漏"
+        ],
+        "analysis": [
+          "正确。异味来源未知时，室内可能已存在达到爆炸浓度的可燃气体或有毒气体。进入、开关电器或在室内逗留都可能引燃或中毒。",
+          "在未确认气体性质与浓度前进入并操作阀门，可能遭遇火焰或中毒，也可能因阀门操作引发静电火花。",
+          "自然通风速度远低于机械排风，且异味明显时浓度已不低；继续在室内观察是把自己置于未知浓度中。",
+          "任何可能产生火花的操作都是火源。乙炔与氧气的混合物一旦点燃，性质极难控制。"
+        ],
+        "knowledge": "L5_separate_gas"
+      }
     },
     {
-      "id": 5,
+      "id": 6,
       "name": "应急处置",
       "subtitle": "出事了，第一步做什么",
-      "image": "lv5_emergency.webp",
+      "image": "lv6_emergency.webp",
       "slots": [
         {
           "id": "e_first",
@@ -412,65 +736,619 @@
           "hint": "预防性工作"
         }
       ],
+      "itemCount": 10,
       "items": [
         {
           "name": "皮肤沾到浓硫酸",
-          "target": "e_first",
-          "knowledge": "L3_burn"
+          "slot": "e_first",
+          "k": "L6_burn"
         },
         {
           "name": "眼睛溅入试剂",
-          "target": "e_first",
-          "knowledge": "L3_eye"
+          "slot": "e_first",
+          "k": "L6_eye"
         },
         {
           "name": "触电者倒地",
-          "target": "e_first",
-          "knowledge": "L5_electric_shock"
+          "slot": "e_first",
+          "k": "L6_electric_shock"
         },
         {
           "name": "吸入有毒气体",
-          "target": "e_first",
-          "knowledge": "L5_inhale"
+          "slot": "e_first",
+          "k": "L6_inhale"
         },
         {
           "name": "大量化学品泄漏",
-          "target": "e_evac",
-          "knowledge": "L5_leak_big"
+          "slot": "e_evac",
+          "k": "L6_leak_big"
         },
         {
           "name": "火势失控",
-          "target": "e_evac",
-          "knowledge": "L5_119"
+          "slot": "e_evac",
+          "k": "L6_119"
         },
         {
           "name": "发生小型事故后",
-          "target": "e_report",
-          "knowledge": "L5_correct_report"
+          "slot": "e_report",
+          "k": "L6_correct_report"
         },
         {
           "name": "洗眼器出水不畅",
-          "target": "e_fix",
-          "knowledge": "L5_shower"
+          "slot": "e_fix",
+          "k": "L6_shower"
         },
         {
           "name": "急救药箱药品过期",
-          "target": "e_fix",
-          "knowledge": "L5_correct_kit"
+          "slot": "e_fix",
+          "k": "L6_correct_kit"
         },
         {
           "name": "发现隐患",
-          "target": "e_report",
-          "knowledge": "L5_correct_training"
+          "slot": "e_report",
+          "k": "L6_correct_training"
         }
       ],
+      "trapCount": 1,
       "traps": [
         {
           "a": "触电者倒地",
           "b": "大量化学品泄漏",
-          "knowledge": "L5_electric_shock"
+          "knowledge": "L6_electric_shock"
         }
-      ]
+      ],
+      "reaction": [
+        {
+          "a": "稀盐酸废液",
+          "b": "氢氧化钠废液",
+          "outcome": "caution",
+          "expect": "平稳共存",
+          "result": "平稳共存",
+          "describe": "两液混合后 pH 趋向中性，温度略有上升，无可见现象。",
+          "why": "酸碱中和本身是可控反应，但两者混合后生成的新废液失去了原来的分类属性，且中和放热在小量时并不明显——这是最容易产生\"原来没事\"错觉的一类混放。",
+          "knowledge": "L2_acid_alkali"
+        }
+      ],
+      "scenario": {
+        "scene": "一名同学在实验室触电后倒地，接触电源的导线仍在带电状态，旁边的地面上有一摊未干的溶剂。",
+        "question": "你应当第一时间做什么？",
+        "answer": 1,
+        "options": [
+          "立即用手把触电者拉开",
+          "先切断电源或挑开导线，确认安全后再实施急救",
+          "先拨打急救电话，然后再考虑断电",
+          "先泼水降温，再去找人帮忙"
+        ],
+        "analysis": [
+          "直接用手拉等于让自己也接入电路，可能造成二人同时触电，这是触电急救中最常见的致命错误。",
+          "正确。断电或绝缘挑开是所有后续动作的前置条件，顺序错了则施救者与伤者都会处于危险中。",
+          "报警重要，但在带电体未解除前施救等于冒险。断电只需数秒，报警可以在确保自身安全后立即进行。",
+          "泼水会导电，反而扩大事故范围；同时溶剂遇水可能扩散，根本起不到作用。"
+        ],
+        "knowledge": "L6_electric_shock"
+      }
+    }
+  ],
+  "knowledgeIndex": [
+    {
+      "id": "L1_hypochlorite_acid",
+      "group": "L1",
+      "title": "次氯酸钠与浓盐酸不能做邻居",
+      "type": "违规·危险",
+      "equation": "NaClO + 2HCl → NaCl + H₂O + Cl₂↑",
+      "basisCount": 2
+    },
+    {
+      "id": "L1_oxidizer_reducer",
+      "group": "L1",
+      "title": "氧化剂与还原剂必须分开",
+      "type": "违规·危险",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L1_separate_list",
+      "group": "L1",
+      "title": "这十类物质必须分离储存",
+      "type": "常见错误",
+      "equation": null,
+      "basisCount": 1
+    },
+    {
+      "id": "L1_acid_base",
+      "group": "L1",
+      "title": "酸和碱不能混放",
+      "type": "常见错误",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L1_correct_vent",
+      "group": "L1",
+      "title": "储存柜需要通风，不能密闭闷着",
+      "type": "正确做法",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L1_correct_label",
+      "group": "L1",
+      "title": "试剂瓶必须保留原标签",
+      "type": "正确做法",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L1_correct_fireproof",
+      "group": "L1",
+      "title": "易燃品要进防火防爆柜",
+      "type": "正确做法",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L1_correct_ventory",
+      "group": "L1",
+      "title": "大量挥发的操作要在通风橱内进行",
+      "type": "正确做法",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L1_correct_tray",
+      "group": "L1",
+      "title": "液体试剂要加防泄漏托盘",
+      "type": "正确做法",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L1_correct_stable",
+      "group": "L1",
+      "title": "试剂瓶要固定，重物在下",
+      "type": "正确做法",
+      "equation": null,
+      "basisCount": 1
+    },
+    {
+      "id": "L2_principle",
+      "group": "L2",
+      "title": "废弃物分类的第一原则是\"性质相容\"",
+      "type": "违规·危险",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L2_halogen",
+      "group": "L2",
+      "title": "含卤素有机废液要单独收集",
+      "type": "常见错误",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L2_acid_alkali",
+      "group": "L2",
+      "title": "废酸与废碱要分开收集",
+      "type": "常见错误",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L2_original_bottle",
+      "group": "L2",
+      "title": "废弃试剂留在原瓶里，别倒出来",
+      "type": "违规·危险",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L2_no_drain",
+      "group": "L2",
+      "title": "实验室废液绝不能倒下水道",
+      "type": "违规·危险",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L2_empty_bottle",
+      "group": "L2",
+      "title": "空试剂瓶要清残留、单独收",
+      "type": "常见错误",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L2_fill_level",
+      "group": "L2",
+      "title": "废液桶不能装太满",
+      "type": "常见错误",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L2_no_mixing_life",
+      "group": "L2",
+      "title": "危险废物不能混入生活垃圾",
+      "type": "违规·危险",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L2_container_color",
+      "group": "L2",
+      "title": "关于废液桶颜色：以本单位规定为准",
+      "type": "地区差异·不作判定依据",
+      "equation": null,
+      "basisCount": 3
+    },
+    {
+      "id": "L2_registry",
+      "group": "L2",
+      "title": "每一桶废液都要有投放记录",
+      "type": "常见错误",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L3_definition",
+      "group": "L3",
+      "title": "\"配伍禁忌\"指的是什么",
+      "type": "地区差异·不作判定依据",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L3_chlorine",
+      "group": "L3",
+      "title": "次氯酸钠 + 浓盐酸 = 氯气",
+      "type": "违规·危险",
+      "equation": "NaClO + 2HCl → NaCl + H₂O + Cl₂↑",
+      "basisCount": 2
+    },
+    {
+      "id": "L3_oxidizer_reducer",
+      "group": "L3",
+      "title": "氧化剂 + 还原剂 = 剧烈放热",
+      "type": "违规·危险",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L3_acid_base",
+      "group": "L3",
+      "title": "酸 + 碱 = 放热飞溅",
+      "type": "违规·危险",
+      "equation": "H₂SO₄ + 2NaOH → Na₂SO₄ + 2H₂O（强放热）",
+      "basisCount": 2
+    },
+    {
+      "id": "L3_ammonia_bleach",
+      "group": "L3",
+      "title": "含氯消毒剂 + 含氨清洁剂 = 氯胺",
+      "type": "违规·危险",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L3_sulfide_acid",
+      "group": "L3",
+      "title": "硫化物 + 酸 = 释放硫化氢",
+      "type": "违规·危险",
+      "equation": "Na₂S + 2HCl → 2NaCl + H₂S↑",
+      "basisCount": 2
+    },
+    {
+      "id": "L3_halogen_organic",
+      "group": "L3",
+      "title": "含卤有机废液 + 醇类废液 = 风险升级",
+      "type": "常见错误",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L3_metals_water",
+      "group": "L3",
+      "title": "遇水反应金属 + 水 = 放出可燃气体",
+      "type": "违规·危险",
+      "equation": "2Na + 2H₂O → 2NaOH + H₂↑",
+      "basisCount": 2
+    },
+    {
+      "id": "L3_oxidizer_organic",
+      "group": "L3",
+      "title": "氧化剂 + 有机物 = 可燃、助燃",
+      "type": "违规·危险",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L3_why_react",
+      "group": "L3",
+      "title": "配伍禁忌的三种成因",
+      "type": "地区差异·不作判定依据",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L4_electric",
+      "group": "L4",
+      "title": "电气火灾：先断电，再灭火",
+      "type": "违规·危险",
+      "equation": null,
+      "basisCount": 3
+    },
+    {
+      "id": "L4_water_reactive",
+      "group": "L4",
+      "title": "钠、钾着火，千万不能用水",
+      "type": "违规·危险",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L4_organic",
+      "group": "L4",
+      "title": "有机溶剂着火：不可用水",
+      "type": "常见错误",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L4_escape",
+      "group": "L4",
+      "title": "逃生要低姿、捂口鼻、不乘电梯",
+      "type": "违规·危险",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L4_clothes",
+      "group": "L4",
+      "title": "身上着火：就地打滚，别跑",
+      "type": "违规·危险",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L4_correct_extinguisher_co2",
+      "group": "L4",
+      "title": "精密仪器和环境，优先二氧化碳灭火器",
+      "type": "正确做法",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L4_correct_extinguisher_dry",
+      "group": "L4",
+      "title": "干粉灭火器是实验室的通用选择",
+      "type": "正确做法",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L4_correct_pa",
+      "group": "L4",
+      "title": "灭火器的使用口诀：提、拔、握、压",
+      "type": "正确做法",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L4_correct_train",
+      "group": "L4",
+      "title": "灭火器要定期检查",
+      "type": "正确做法",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L4_wrong_water_advice",
+      "group": "L4",
+      "title": "常见误区：所有火都可以用水",
+      "type": "常见错误",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L5_upright",
+      "group": "L5",
+      "title": "气瓶必须直立固定",
+      "type": "违规·危险",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L5_no_valve_anchor",
+      "group": "L5",
+      "title": "不能拿瓶阀或瓶头当固定点",
+      "type": "常见错误",
+      "equation": null,
+      "basisCount": 1
+    },
+    {
+      "id": "L5_oil",
+      "group": "L5",
+      "title": "氧气瓶严禁沾染油脂",
+      "type": "违规·危险",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L5_separate_gas",
+      "group": "L5",
+      "title": "可燃气体与助燃气体要分开",
+      "type": "违规·危险",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L5_no_exhaust",
+      "group": "L5",
+      "title": "气瓶不能用到没气",
+      "type": "常见错误",
+      "equation": null,
+      "basisCount": 1
+    },
+    {
+      "id": "L5_cap",
+      "group": "L5",
+      "title": "搬运气瓶要戴瓶帽、用专用车",
+      "type": "常见错误",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L5_heat",
+      "group": "L5",
+      "title": "气瓶要远离热源与曝晒",
+      "type": "常见错误",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L5_correct_color",
+      "group": "L5",
+      "title": "气瓶颜色是重要的识别依据",
+      "type": "正确做法",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L5_correct_fixed",
+      "group": "L5",
+      "title": "固定要牢，还要方便检查",
+      "type": "正确做法",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L5_correct_autoclave",
+      "group": "L5",
+      "title": "高压灭菌锅使用前先确认",
+      "type": "常见错误",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L5_correct_inspect",
+      "group": "L5",
+      "title": "气瓶要在检验有效期内",
+      "type": "正确做法",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L6_burn",
+      "group": "L6",
+      "title": "化学灼伤：先大量清水冲洗",
+      "type": "违规·危险",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L6_eye",
+      "group": "L6",
+      "title": "眼睛溅入：冲洗至少 15 分钟",
+      "type": "违规·危险",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L6_leak",
+      "group": "L6",
+      "title": "化学品泄漏：先疏散、通风、上报",
+      "type": "违规·危险",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L6_leak_big",
+      "group": "L6",
+      "title": "大量泄漏：撤离并求助专业人员",
+      "type": "违规·危险",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L6_electric_shock",
+      "group": "L6",
+      "title": "触电急救：先断电，再救人",
+      "type": "违规·危险",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L6_swallow",
+      "group": "L6",
+      "title": "误服化学品：不要盲目催吐",
+      "type": "常见错误",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L6_inhale",
+      "group": "L6",
+      "title": "吸入有毒气体：迅速转移到空气新鲜处",
+      "type": "违规·危险",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L6_119",
+      "group": "L6",
+      "title": "报警要讲清楚：地点、物质、火势、人",
+      "type": "常见错误",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L6_shower",
+      "group": "L6",
+      "title": "应急喷淋与洗眼器要定期点检",
+      "type": "常见错误",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L6_correct_kit",
+      "group": "L6",
+      "title": "急救药箱要定期检查有效期",
+      "type": "正确做法",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L6_correct_training",
+      "group": "L6",
+      "title": "应急处置要演练过才作数",
+      "type": "正确做法",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L6_correct_report",
+      "group": "L6",
+      "title": "事故必须逐级上报，不得隐瞒",
+      "type": "常见错误",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L6_ppe",
+      "group": "L6",
+      "title": "进入实验室：护目镜、实验服、手套",
+      "type": "正确做法",
+      "equation": null,
+      "basisCount": 2
+    },
+    {
+      "id": "L6_correct_fire_blanket",
+      "group": "L6",
+      "title": "灭火毯是扑灭小面积火的有效工具",
+      "type": "正确做法",
+      "equation": null,
+      "basisCount": 2
     }
   ]
 }

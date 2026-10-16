@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>实验室安全官 · 隐患归位挑战</title>
-<meta name="description" content="清华大学实验室安全知识大赛参赛作品：通过拖拽归位排查实验室安全隐患，边玩边学规范依据。">
+<meta name="description" content="清华大学实验室安全知识大赛参赛作品：归位排查、配伍禁忌实验、情境决策三段式玩法，边玩边学规范依据。">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -14,18 +14,27 @@
   <div class="start-inner">
     <div class="badge"><span class="dot"></span>清华大学第七届平安校园 · 实验室安全知识大赛</div>
     <h1 class="game-title">实验室<span class="hl">安全官</span></h1>
-    <p class="game-sub">五个关卡，把放错位置的东西归回原处。<br>每归位一次，你就知道了一条规范背后的道理。</p>
+    <p class="game-sub">六个关卡，三段玩法：把放错的东西归位、验证它们能不能同处一柜、判断出事时第一步该做什么。</p>
     <div class="start-cover"><img id="coverImg" alt="实验室场景插画"></div>
     <div class="start-meta">
-      <div class="meta-chip">共 <b>5</b> 个关卡</div>
-      <div class="meta-chip"><b id="kCount">55</b> 个安全知识点</div>
-      <div class="meta-chip">单局约 <b>5</b> 分钟</div>
+      <div class="meta-chip"><b id="lvCount">6</b> 个关卡</div>
+      <div class="meta-chip"><b id="kCount">65</b> 个安全知识点</div>
+      <div class="meta-chip"><b id="scCount">6</b> 道情境决策题</div>
+      <div class="meta-chip">单局约 <b>6</b> 分钟</div>
       <div class="meta-chip">鼠标 / <b>触屏</b>均可</div>
+    </div>
+    <div class="start-flow">
+      <div class="flow-step"><span class="fs-n">1</span><b>归位排查</b><span class="fs-d">把试剂与废弃物放回正确的容器</span></div>
+      <div class="flow-step"><span class="fs-n">2</span><b>配伍实验</b><span class="fs-d">先预测再验证：这两样能否同处一柜</span></div>
+      <div class="flow-step"><span class="fs-n">3</span><b>情境决策</b><span class="fs-d">现场已出事时，判断第一步该做什么</span></div>
     </div>
     <div class="start-actions">
       <button class="btn btn-lg" id="btnStart">开始挑战</button>
       <button class="btn btn-ghost btn-lg" id="btnManual">知识手册</button>
     </div>
+    <p class="start-note">
+      本作所有判定依据均取自现行国家标准与实验室安全管理制度，涉及地区或单位规定不一致的内容会单独注明。实际操作请以所在单位的规定为准。
+    </p>
   </div>
 </section>
 
@@ -34,14 +43,18 @@
   <div class="topbar">
     <div class="tb-logo"><span class="mark">安</span>实验室安全官</div>
     <div class="tb-level">
-      第 <b id="lvNum">1</b> / 5 关
+      第 <b id="lvNum">1</b> / 6 关
       <span style="color:var(--gray-200)">|</span>
       <b id="lvName">化学品储存柜</b>
     </div>
     <div class="tb-stats">
-      <div class="stat"><div class="lbl">剩余时间</div><div class="val" id="timeVal">01:30</div></div>
+      <div class="stat"><div class="lbl">剩余时间</div><div class="val" id="timeVal">01:40</div></div>
       <div class="stat"><div class="lbl">得分</div><div class="val" id="scoreVal">0</div></div>
       <div class="stat"><div class="lbl">已归位</div><div class="val" id="progVal">0/0</div></div>
+      <div class="stat stat-risk">
+        <div class="lbl">隐患值 <span class="expert-badge" id="expertBadge" style="display:none">规范达人</span></div>
+        <div class="val"><span class="risk-dots" id="riskDots"></span></div>
+      </div>
     </div>
   </div>
   <div class="progress-wrap"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
@@ -69,7 +82,7 @@
   </div>
 
   <div class="bottombar">
-    <div class="bb-hint"><b>操作</b>拖动项目到目标容器，或点击项目后点击容器</div>
+    <div class="bb-hint"><b>操作</b>拖动项目到目标容器，或点击项目后点击容器<span class="bb-risk">隐患值满则本关重来</span></div>
     <div class="bb-actions">
       <button class="btn btn-ghost btn-sm" id="btnRestartLv">重玩本关</button>
       <button class="btn btn-ghost btn-sm" id="btnQuit">返回首页</button>
@@ -83,7 +96,7 @@
     <div class="result-hero">
       <img id="resImg" alt="结算插画">
       <div class="result-title" id="resTitle">恭喜通过</div>
-      <div class="result-desc" id="resDesc">你已经完成全部五个关卡的隐患排查</div>
+      <div class="result-desc" id="resDesc">你已经完成全部六个关卡的隐患排查</div>
     </div>
     <div class="result-score-row">
       <div class="rs-item"><div class="n" id="resScore">0</div><div class="l">总得分</div></div>
@@ -92,7 +105,8 @@
       <div class="rs-item"><div class="n" id="resLearn">0</div><div class="l">掌握知识点</div></div>
     </div>
     <div class="result-review">
-      <h3>本次出现的知识点</h3>
+      <h3>本次掌握情况</h3>
+      <p class="rr-note">按重要程度分层。做错过的条目排在最前面，标为需要重点复习。</p>
       <div id="resList"></div>
     </div>
     <div class="result-actions">
@@ -107,13 +121,16 @@
   <div class="topbar">
     <div class="tb-logo"><span class="mark">册</span>知识手册</div>
     <div class="tb-stats">
+      <div class="stat"><div class="lbl">掌握进度</div><div class="val" id="manualProg">0 / 0</div></div>
       <button class="btn btn-ghost btn-sm" id="btnBackHome">返回</button>
     </div>
   </div>
+  <div class="manual-progress"><div class="progress-bar" id="manualBar" style="width:0%"></div></div>
   <div class="manual-wrap">
     <h2>知识点与规范依据</h2>
     <p class="manual-note">
-      下面按关卡列出游戏中出现的全部知识点。每条都标了出处，方便核对。涉及地区或单位规定不一致的内容，已在条目中单独说明。实际执行时，请以你所在单位的管理规定为准。
+      全部条目按重要程度分为四层。每条都标注了依据出处，可直接对照标准原文核对。
+      涉及地区或单位规定不一致的内容已单独说明——实际执行时，请以你所在单位的管理规定为准。
     </p>
     <div id="manualBody"></div>
   </div>
