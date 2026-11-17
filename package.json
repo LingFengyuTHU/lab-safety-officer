@@ -1,0 +1,8 @@
+{
+  "name": "lab-safety-officer",
+  "version": "0.2.1",
+  "private": true,
+  "description": "实验室安全官 · 异常实验夜",
+  "scripts": { "build": "node src/build.mjs" },
+  "engines": { "node": ">=18" }
+}

@@ -1,0 +1,36 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-11-17",
+  "assets": [
+    {
+      "file": "chemical.png",
+      "columns": 4,
+      "rows": 4,
+      "prompt": "Use case: stylized-concept. Production sprite atlas for original cozy top-down 16-bit laboratory action game, authentic Stardew Valley-inspired chunky pixel craftsmanship, not copied game assets. Square PNG with TRUE transparent alpha. EXACT 4 columns x 4 rows, each equal square cell isolated, centered, 20% transparent gutter, no lines, no lettering. Row 1 four walk/bounce frames of a squat glass Erlenmeyer flask monster with amber liquid, teal angry eyes and dark little feet. Row 2 four frames of a red-and-ivory thermometer centipede monster: idle, crouch, dash extended, recover. Row 3 four walk frames of a little gang of three connected blue test tubes with eyes and feet. Row 4 four frames of a purple glass eyedropper monster floating upright: idle, aiming, releasing, recover. All face down-right, same size and anchor across row. Readable original silhouettes using about 24x32 logical pixels enlarged nearest-neighbor. Hard stepped edges, one dark-brown pixel outline, discrete two-tone shading, restricted 20-color desaturated teal, cream, amber, purple palette. NO smoothing, gradients, bloom, gloss, rendered 3D, painted noise, background, ground plane or drawn checkerboard. Every whole sprite inside its cell. Game animation asset, not concept illustration."
+    },
+    {
+      "file": "biology.png",
+      "columns": 4,
+      "rows": 4,
+      "prompt": "Use case: stylized-concept. Production sprite atlas for original cozy top-down 16-bit laboratory action game with Stardew Valley-inspired hand-placed chunky pixels, original designs. Square transparent PNG EXACT 4 columns x 4 rows equal square cells. One sprite per cell centered with 20% transparent margins, no text or grid. Row 1 four animation frames of a small walking leafy sprout creature with ochre terracotta root body, two green leaves and simple dark eyes: walk, root down, aim, spit. Row 2 four bounce frames of a squat translucent lavender petri-dish slime monster with cream glass rim, soft wavy jelly shape rendered in hard pixels, tiny eyes. Row 3 four running frames of a small grey mouse MODEL projection with visibly toy-like teal seams, rounded ears, pink tail, not realistic animal. Row 4 four frames of an amber and teal moth specimen creature: wings closed, opening, fully spread, landing. Constant anchors, simple readable 24x32 logical pixel silhouettes enlarged nearest-neighbor, warm brown outline, restricted desaturated green cream lavender amber palette, two-tone discrete shade. No antialiasing, gradients, bloom, painterly texture, realism or 3D. True alpha transparency, no drawn checkerboard or floor. Every sprite complete inside cell. Usable game animation atlas."
+    },
+    {
+      "file": "environments.png",
+      "columns": 4,
+      "rows": 4,
+      "prompt": "Use case: stylized-concept. Usable original 16-bit pixel game environment atlas, Stardew Valley-inspired cozy interior props, top-down orthographic with slight visible front faces NEVER isometric. EXACT 4 columns x 4 rows equal square cells on true transparent PNG. 16 independent isolated props centered with generous gutters and no text/grid/floor background. Rows1-2 chemistry lab: row1 col1 wooden bench with teal worktop and amber flask, col2 same bench with sink and faucet, col3 tall cream fume hood with glass sash, col4 wooden reagent cabinet with colored bottles. Row2 col1 wall periodic-table board represented by simple colored squares NO letters, col2 red safety shower pipe, col3 closed yellow waste storage cabinet, col4 glassware rack. Rows3-4 biology lab: row3 col1 matching wood bench with microscope, col2 same bench with lavender petri dishes and green specimen, col3 glass-front tall incubator with seedling trays, col4 specimen cabinet with opaque teal drawers. Row4 col1 wall diagram board with abstract leaf and cell pictograms NO letters, col2 potted lush fern, col3 cream refrigerator with green handle, col4 short wood growing shelf with potted plants. Consistent cozy walnut cream desaturated teal sage amber lavender palette, about 48x48 logical pixels per cell enlarged nearest-neighbor, hard chunky pixel clusters, single dark outline, discrete 2-tone shading, no noise, glow, gradient, glossy 3D or painted texture. Props occupy max80%cell. Real transparent alpha. Usable sprites not a screenshot."
+    },
+    {
+      "file": "weapons.png",
+      "columns": 4,
+      "rows": 2,
+      "prompt": "Use case: stylized-concept. Usable original pixel-art laboratory game weapon icons. Wide transparent PNG 2:1 aspect ratio EXACT 4 columns x 2 rows equal square cells, one centered isolated weapon per cell, ample gutter, no text or grid. Stardew Valley-inspired cozy 16-bit hand-placed chunky pixels, all original designs, warm brown outlines, desaturated teal cream copper amber palette, hard stepped silhouette, 2 tone shade, 32x32 logical pixels enlarged nearest-neighbor. Row1 col1 red fire extinguisher black hose aiming right, col2 cream teal micropipette pistol aiming right, col3 corked round amber reagent flask, col4 small glass alcohol lamp with tiny orange pixel flame and brass cap. Row2 col1 copper electromagnetic coil around teal core with handle, col2 silver vernier caliper with teal grip jaws toward right, col3 heavy brass calibration weight mounted as small hammer pointing right, col4 lavender petri dish with three small green glowing hard-pixel cells. No realistic dangerous details, no gradients, gloss, bloom, noise, smoothing, floor, shadow blobs or painted style. Real transparent alpha; weapons recognizable and contained in their cells. Inventory and equipped game sprites."
+    },
+    {
+      "file": "bosses.png",
+      "columns": 4,
+      "rows": 4,
+      "prompt": "Use case: stylized-concept. Original cozy 16-bit pixel-art top-down laboratory game enemy sprite atlas inspired by Stardew Valley pixel craftsmanship. EXACT 4 columns by4 rows equal square cells, TRUE transparent alpha background, ample gutter, no grid/text/labels. Each row four animation frames with constant size and feet anchor. Row1 small teal cylindrical capacitor robot with two feet, copper antenna and amber eyes: idle, walking, charging, firing. Row2 large copper electromagnetic coil armored monster on a squat teal mechanical base with two stern eyes: idle, compressing coil, lunging forward, recovering. Row3 large round amber glass flask boss with cork and dark stubby legs, cream rim and stern teal eyes: idle, wobble left, swell charging, release. Row4 large lavender mushroom boss with teal spots, ivory stalk, brown root feet and tiny eyes: idle, crouch, cap expanding, release spores. All fully inside their own cells occupying about70%, viewed top-down with some front visible, never isometric. Chunky hard edged pixel clusters, about32x40 logical pixels percharacter enlarged nearest-neighbor. Limited earthy cream, walnut, sage, copper, lavender palette, dark outline, 2-tone shading. No smooth gradients, glossy 3D, bloom, noise, painted texture, floor or checkerboard. Usable game animation sprites, not promotional art."
+    }
+  ]
+}

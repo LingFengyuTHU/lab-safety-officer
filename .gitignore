@@ -30,3 +30,6 @@ build/shots/
 
 # 数据文件备份
 *.bak
+
+# Node.js
+node_modules/
