@@ -4,6 +4,10 @@
 
 俯视角自动战斗游戏：穿越物理、化学、生物三座实验室，完成十二波挑战，通过拾取研究点和安全知识答题强化装备。包含八种武器、十六种模块、72 道题与原创八比特音乐《微光值夜》。后期升级费用逐波提高，三个实验室采用不同配色和布局。
 
+## 在线游玩
+
+[打开游戏](https://lingfengyuthu.github.io/lab-safety-officer/)
+
 ## 直接运行
 
 使用现代 Chrome 或 Edge 打开 **实验室安全官_单文件版.html**，无需安装、启动服务或联网加载资源。index.html 与它内容完全相同，也可直接打开。
@@ -76,14 +80,10 @@ npm run build
 
 部署已经生成的 HTML 不需要 Node.js、依赖安装或在线构建。最小上线只需 index.html 和 .nojekyll；为了让别人继续开发，建议上传本文件夹全部内容。中文命名的 HTML 是可选离线副本。
 
-部署步骤依据 [GitHub Pages 发布来源说明](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) 和 [入口文件说明](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site)。游戏入口位于仓库根目录；在线游玩需要在仓库设置中启用 GitHub Pages。
+部署步骤依据 [GitHub Pages 发布来源说明](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) 和 [入口文件说明](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site)。发布来源为 main 分支根目录。
 
 ## 内容与素材
 
 图集为本项目生成的原创设计，没有使用参考游戏的原始素材；《微光值夜》使用原创乐谱，无外部音乐采样。安全题答案后附公开资料出处。器材战斗属于虚构模拟，真实实验应遵循实际操作规程。
 
 本目录未附开源许可证；发布到公开仓库前可根据作者意愿另行选择代码和素材的许可方式。
-
-## 历史版本
-
-仓库中原有的中文编号目录、build 目录和早期设计文档保留用于追溯。当前最终版以根目录 index.html、src/、assets/ 和本说明为准。
