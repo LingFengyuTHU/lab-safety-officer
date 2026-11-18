@@ -61,13 +61,11 @@ assets/audio/                      原创音乐 WAV 与乐谱资料
 docs/                              题库出处与素材生成记录
 ```
 
-如果拿到的是“最终作品”交接压缩包，目录有所不同：源码项目位于 `最终作品源文件/`，可直接运行的中文 HTML 放在外层，另附 `ppt及讲稿/`、`宣传视频/`、AI 接手文档和组员手册。**这些展示和交接材料不属于当前 GitHub 仓库内容。** 当前交接包的中文 HTML 与内部 `index.html` 内容一致。
-
 源码、题库、图集和构建工具足以继续开发游戏，不依赖原开发目录。音乐资料和图集保留供维护使用，HTML 运行时不读取外置资源。交接包不包含全部历史开发快照和视频剪辑工程。
 
 ## 继续开发
 
-使用 Node.js 18 或以上版本，在仓库根目录（交接包中为 `最终作品源文件/`）运行：
+使用 Node.js 18 或以上版本，在仓库根目录运行：
 
 ```sh
 npm run build
@@ -108,7 +106,6 @@ npm run build
 
 自行部署副本时，将源码项目的内容放在仓库根目录，让 `index.html` 直接位于根目录。在仓库 Settings → Pages 选择 Deploy from a branch，指定发布分支与 `/(root)`。具体步骤参见 [GitHub Pages 发布来源说明](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)。
 
-请不要把整个“最终作品”交接外层直接上传为站点根目录，否则入口会多嵌套一层。修改后的副本应同步自己的网址和二维码，避免仍然指向原项目。
 
 ## 创作与用途
 
